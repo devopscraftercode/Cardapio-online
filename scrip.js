@@ -188,7 +188,7 @@ checkoutBtn.addEventListener("click", function() {
    }).join("")
 
    const message = encodeURIComponent(cartItems)
-   const phone = "5515998257757"
+   const phone = "393286979406"
    
 
    
