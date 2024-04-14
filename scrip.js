@@ -90,26 +90,22 @@ function updateCartModal () {
                 </button>
                 
             </div>        
-        `
+        `;
 
         total += item.price * item.quantity;
 
-        
+        cartItemsContainer.appendChild(cartItemElement);
+    });
 
-        cartItemsContainer.appendChild(cartItemElement)
-    })
+    // Aqui você pode criar uma variável para armazenar o valor total
+    const totalPrice = total;
 
-    
-
-    
-
-    cartTotal.textContent = total.toLocaleString("pt-BR", {
+    cartTotal.textContent = totalPrice.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL"
     });
 
     cartCounter.innerHTML = cart.length;
-
 }
 //Função para remover o item do carrinho
 cartItemsContainer.addEventListener("click", function(event) {
@@ -182,22 +178,21 @@ checkoutBtn.addEventListener("click", function() {
 
     //Enviar o pedido para API Whats
     const cartItems = cart.map((item) => {
-    return (
-        `Quantidade (${item.quantity}) - ${item.name} - Preço: R$${item.price.toFixed(2)} \n`
-    )
-   }).join("")
+        return `Quantidade (${item.quantity}) - ${item.name} - Preço: R$${(item.price * item.quantity).toFixed(2)} \n`;
+    }).join("");
 
-   const message = encodeURIComponent(cartItems)
-   const phone = "393286979406"
-   
+    // Calcula o valor total do carrinho
+    let total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
-   
-   window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addresssInput.value} `,"_blank")
+    // Abre uma nova janela do WhatsApp com a mensagem do pedido e o valor total
+    const message = encodeURIComponent(`${cartItems} \n Valor Total: R$${total.toFixed(2)}`);
+    const phone = "393286979406";
+    window.open(`https://wa.me/${phone}?text=${message} \n Endereço: ${addresssInput.value}`, "_blank");
 
-   cart=[];
-   updateCartModal();
-
-})
+    // Limpa o carrinho e atualiza o modal do carrinho
+    cart = [];
+    updateCartModal();
+});
 
 // Verificar a hora e manipular o card Horario//
 function checkRestaurantOPen(){
