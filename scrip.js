@@ -186,7 +186,7 @@ checkoutBtn.addEventListener("click", function() {
 
     // Abre uma nova janela do WhatsApp com a mensagem do pedido e o valor total
     const message = encodeURIComponent(`${cartItems} \n Valor Total: R$${total.toFixed(2)} \n`);
-    const phone = "393286979406";
+    const phone = "3530852522570";
     window.open(`https://wa.me/${phone}?text=${message} \n Endereço: ${addresssInput.value}`, "_blank");
 
     // Limpa o carrinho e atualiza o modal do carrinho
